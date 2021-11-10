@@ -34,8 +34,13 @@ int main(){
     std::cout << "Example of matrix \n";
     // matrix definition
     Eigen::Matrix3f i,j;
-    i << 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0;
-    j << 2.0, 3.0, 1.0, 4.0, 6.0, 5.0, 9.0, 7.0, 8.0;
+    i << 1.0, 2.0, 3.0, 
+         4.0, 5.0, 6.0,
+         7.0, 8.0, 9.0;
+         
+    j << 2.0, 3.0, 1.0, 
+         4.0, 6.0, 5.0, 
+         9.0, 7.0, 8.0;
     // matrix output
     std::cout << "Example of output \n";
     std::cout << i << std::endl;
