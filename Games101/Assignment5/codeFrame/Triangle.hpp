@@ -10,7 +10,24 @@ bool rayTriangleIntersect(const Vector3f& v0, const Vector3f& v1, const Vector3f
     // TODO: Implement this function that tests whether the triangle
     // that's specified bt v0, v1 and v2 intersects with the ray (whose
     // origin is *orig* and direction is *dir*)
+    // MT Algorithm:
+    // Redefine: (PS: tnear, u, v is equal with t, b1, b2)
+    auto O = orig, P0 = v0, P1 = v1, P2 = v2, D = dir;
+    auto E1 = P1 - P0, E2 = P2 - P0, S = O - P0;
+    auto S1 = crossProduct(D, E2), S2 = crossProduct(S, E1);
+
     // Also don't forget to update tnear, u and v.
+    tnear = dotProduct(S2, E2) / dotProduct(S1, E1);
+    u = dotProduct(S1, S) / dotProduct(S1, E1);
+    v = dotProduct(S2, D) / dotProduct(S1, E1);
+
+    // judge: 
+    // Ray origin exists correctly AND
+    // the point is inside by the triangle
+    if(tnear > 0 && u >= 0 && v >= 0 && (1.0f - u - v) >= 0) {
+        return true;
+    }
+    
     return false;
 }
 
