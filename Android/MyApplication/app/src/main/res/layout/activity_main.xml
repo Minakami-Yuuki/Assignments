@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<!--  layout_width && layout_height : dp  -->
+<!--  textsize : sp  -->
+<!--  textcolor && background: 透明,红,绿,蓝 (00 00 00 00)  -->
+
+<!--  String类型 和 Colors类型 统一放置在 values 下  -->
+
+<!--  shadowRadius : 模糊度, 搭配shadowColor使用  -->
+
+<!--  跑马灯: marqueeRepeat
+      方式 :
+      1.添加click
+      2.用java类继承TextView并添加Force方法
+      3.添加<requestFocus/> -->
+<!--  1. <com.example.myapplication.TestMarquee  -->
+<!--  2. andriod:click = "true" -->
+<!--  3. <requestFocus/>  -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        android:id="@+id/Test_One"
+        android:text="@string/text_name"
+        android:textColor="@color/purple_500"
+        android:textStyle="italic"
+        android:textSize="40sp"
+        android:background="@color/purple_200"
+        android:gravity="center"
+        android:shadowColor="@color/yellow"
+        android:shadowRadius="3.0"
+        android:shadowDx="10.0"
+        android:shadowDy="10.0"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <requestFocus/>
+    </TextView>
+
+    <Button
+        android:id="@+id/button_name"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/btn_select"
+
+
+        tools:ignore="MissingConstraints">
+
+    </Button>
+
+    <EditText
+        android:hint="TENET"
+        android:textColorHint="@color/yellow"
+        android:drawableLeft="@drawable/btn_select"
+        android:drawablePadding="10dp"
+        android:paddingLeft="20dp"
+        android:layout_width="200dp"
+        android:layout_height="500dp"
+        android:inputType="date">
+
+    </EditText>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
