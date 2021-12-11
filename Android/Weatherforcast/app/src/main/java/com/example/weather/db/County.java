@@ -4,9 +4,10 @@ import org.litepal.crud.LitePalSupport;
 
 public class County extends LitePalSupport {
 
+    // 存放县级数据
     private String countyName;
-    private String  countyCode;
-    private String  cityCode;
+    private String countyCode;
+    private String cityCode;
 
 
     public String getCountyName() {

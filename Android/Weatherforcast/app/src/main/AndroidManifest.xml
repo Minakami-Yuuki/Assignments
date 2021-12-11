@@ -18,7 +18,7 @@
         <service
             android:name="com.example.weather.service.AutoUpdateService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity android:name="com.example.weather.WeatherActivity" />
         <activity android:name="com.example.weather.MyConcernList"/>

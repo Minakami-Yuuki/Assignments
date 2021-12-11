@@ -4,6 +4,7 @@ import org.litepal.crud.LitePalSupport;
 
 public class City extends LitePalSupport {
 
+    // 存放市级数据
     private String cityName;
     private String cityCode;
     private String provinceCode;

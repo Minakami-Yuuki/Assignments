@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Weather {
 
+        // 采用注解：
         @SerializedName("province")
         public String provinceName;
 
@@ -18,12 +19,6 @@ public class Weather {
 
         @SerializedName("temperature")
         public String temperatureName;
-
-        @SerializedName("winddirection")
-        public String windDirection;
-
-        @SerializedName("windpower")
-        public String windPower;
 
         @SerializedName("humidity")
         public String humidityName;

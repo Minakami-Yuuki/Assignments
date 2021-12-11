@@ -33,46 +33,41 @@ import com.example.weather.util.HttpUtil;
 import com.example.weather.util.Utility;
 
 public class ChooseAreaFragment extends Fragment {
+    // 设置地区的级别
     private static final int LEVEL_PROVINCE = 0;
     private static final int LEVEL_CITY = 1;
     private static final int LEVEL_COUNTY = 2;
+
+    // 使用datalist列表
+    // 存储保存的地区的 省、市、县和天气 数据
     private List<String> dataList = new ArrayList<>();
+
     private ArrayAdapter<String> adapter;
     private TextView titleText;
     private Button backButton;
     private ListView listView;
 
-    /**
-     * 省列表
-     */
+    // 省级列表
     private List<Province> provinceList;
-    /**
-     * 城市列表
-     */
+    // 市级列表
     private List<City> cityList;
-    /**
-     * 城镇列表
-     */
+    // 县级列表
     private List<County> countyList;
-    /**
-     * 当前等级
-     */
+    // 当前等级
+    // 区分 省 市 县
     private int currentLevel;
 
-    /**
-     * 选中的省份
-     */
+    // 所选中的省份
     private Province selectedProvince;
-
-    /**
-     * 选中的城市
-     */
+    // 所选中的市区
     private City selectedCity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // 获得布局填充器
         View view = inflater.inflate(R.layout.choose_area,container,false);
+        // 获得当前布局的各个组件
         titleText = view.findViewById(R.id.title_text);
         backButton = view.findViewById(R.id.back_button);
         listView = view.findViewById(R.id.list_view);
@@ -86,100 +81,150 @@ public class ChooseAreaFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // 用于侧滑菜单：
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // 若点击区域的等级为省级
                 if (currentLevel == LEVEL_PROVINCE) {
+                    // 获取当前省级地区的位置
                     selectedProvince = provinceList.get(position);
+                    // 查询数据库或网络资源
+                    // 获取当前省份中的市区信息
                     queryCities();
-                } else if (currentLevel == LEVEL_CITY) {
+                }
+                // 若点击区域的等级为市级
+                else if (currentLevel == LEVEL_CITY) {
+                    // 获取当前省级地区的位置
                     selectedCity = cityList.get(position);
+                    // 获取当前市区中的县级信息
                     queryCounties();
-                } else if (currentLevel == LEVEL_COUNTY) {
+                }
+                // 若点击区域的等级为县级 (需要最后显示的资源)
+                else if (currentLevel == LEVEL_COUNTY) {
+                    // 获得当前县级的名称和代码
                     String countyCode = countyList.get(position).getCountyCode();
                     String countyName = countyList.get(position).getCountyName();
+
+                    // 判断当前执行的活动是否为 主活动类型
+                    // 即是否正在选取 市、区、县
                     if (getActivity() instanceof MainActivity) {
+                        // 准备启动该活动
                         Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        // 将当前最后一级的 县级名称和代码 进行保存 并传入活动
                         intent.putExtra( "adcode",countyCode);
                         intent.putExtra("city",countyName);
                         startActivity(intent);
                         getActivity().finish();
-                    } else if (getActivity() instanceof WeatherActivity) {//在WeatherActivity活动中
+                    }
+                    // 判断当前执行的活动是否为 查看天气的活动类型
+                    else if (getActivity() instanceof WeatherActivity) {
                         WeatherActivity activity = (WeatherActivity) getActivity();
-                        activity.drawerLayout.closeDrawers();//关闭滑动菜单
-                        activity.swipeRefresh.setRefreshing(true);//下拉刷新进度条
+                        // 关闭左侧滑动菜单
+                        activity.drawerLayout.closeDrawers();
+                        // 启用下拉刷新进度条
+                        activity.swipeRefresh.setRefreshing(true);
+                        // 显示当前 县级 的天气情况
                         activity.requestWeather(countyCode);
                     }
                 }
             }
         });
 
+        // 返回主页按钮：
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentLevel == LEVEL_COUNTY){
+                // 判断当前页面的等级
+                if (currentLevel == LEVEL_COUNTY) {
+                    // 若当前页面停留在 县级
+                    // 则返回至上一级的 市级 页面
                     queryCities();
-                }else if (currentLevel == LEVEL_CITY){
+                }
+                else if (currentLevel == LEVEL_CITY) {
+                    // 若当前页面停留在 市级
+                    // 则返回至上一级的 省级 页面
                     queryProvinces();
                 }
             }
         });
 
+        // 默认停留在 省级 页面
         queryProvinces();
     }
 
-    /**
-     * 查询所有的省，优先从数据库查询，如果没有查到再去服务器上查询
-     */
+    // 查询所有省份
+    // 优先从当前数据库查询
+    // 若不存在则再去服务器上查询
     private void queryProvinces(){
-        titleText.setText("中 国");
+        titleText.setText("中 国 地 区 省 份");
+        // 隐藏返回按钮
         backButton.setVisibility(View.GONE);
+
+        // 当前数据库(LitePal)中查询：
         provinceList = LitePal.findAll(Province.class);
-        if (provinceList.size()>0){
+        if (provinceList.size() > 0) {
             dataList.clear();
-            for (Province province : provinceList){
+            // 将datalist更新为中国的所有省份
+            for (Province province : provinceList) {
                 dataList.add(province.getProvinceName());
             }
+            // 刷新ListView (显示更新后的内容)
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
+            // 将页面等级调整为上一级
             currentLevel = LEVEL_PROVINCE;
-        }else{
-            String address = "https://restapi.amap.com/v3/config/district?keywords=中国&subdistrict=1&key=c1894e9fcaf35e9fceabe9afaf40d45f";
+        }
+        // 若当前数据库没有数据
+        // 则跳调用API进行访问
+        else{
+            String address = "https://restapi.amap.com/v3/config/district?keywords=中国&subdistrict=1&key=562a75a2243ea6a24389af6f5f954388";
+            // 查询 省份 信息
             queryFromServer(address,"province");
         }
     }
-    /**
-     * 查询选中省内所有的市，优先从数据库查询，如果没有查询到再去服务器上查询。
-     */
+
+    // 查询所有市区
+    // 优先从当前数据库查询
+    // 若不存在则再去服务器上查询
     private void queryCities() {
         titleText.setText(selectedProvince.getProvinceName());
+        // 显示返回按钮
         backButton.setVisibility(View.VISIBLE);
+
+        // 需要根据特定 省份 来查询 市区
         cityList = LitePal.where("provinceCode = ?",
                 String.valueOf(selectedProvince.getProvinceCode())).find(City.class);
-        if (cityList.size()>0){
+        // 当前数据库(LitePal)中查询： (以下操作同 queryProvinces())
+        if (cityList.size() > 0) {
             dataList.clear();
-            for (City city : cityList){
+            for (City city : cityList) {
                 dataList.add(city.getCityName());
             }
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
             currentLevel = LEVEL_CITY;
-        }else {
+        }
+        else {
+            // 需要获取先前保存的省份信息
             String provinceName = selectedProvince.getProvinceName();
             String address = "https://restapi.amap.com/v3/config/district?keywords="+provinceName+"&subdistrict=1&key=c1894e9fcaf35e9fceabe9afaf40d45f";
+            // 查询 市区 信息
             queryFromServer(address,"city");
         }
     }
 
-    /**
-     * 查询选中市内所有的县，优先从数据库查询，如果没有查询到再去服务器上查询。
-     */
+    // (具体方法同上)
+    // 查询所有乡县
+    // 优先从当前数据库查询
+    // 若不存在则再去服务器上查询
     private void queryCounties() {
         titleText.setText(selectedCity.getCityName());
         backButton.setVisibility(View.VISIBLE);
+
         countyList = LitePal.where("cityCode=?",
                 String.valueOf(selectedCity.getCityCode())).find(County.class);
-        if (countyList.size() >0){
+        if (countyList.size() > 0) {
             dataList.clear();
             for (County county:countyList){
                 dataList.add(county.getCountyName());
@@ -187,7 +232,8 @@ public class ChooseAreaFragment extends Fragment {
             adapter.notifyDataSetChanged();
             listView.setSelection(0);
             currentLevel = LEVEL_COUNTY;
-        }else{
+        }
+        else {
             String cityName = selectedCity.getCityName();
             String address = "https://restapi.amap.com/v3/config/district?keywords="+cityName+"&subdistrict=1&key=c1894e9fcaf35e9fceabe9afaf40d45f";
             queryFromServer(address,"county");
@@ -195,9 +241,7 @@ public class ChooseAreaFragment extends Fragment {
     }
 
 
-    /**
-     * 根据传入的地址和类型从服务器上查询省市县数据
-     */
+    // 从传入的API服务器中获取 省 市 县 的数据
     private void queryFromServer(String address, final String type){
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
@@ -205,7 +249,7 @@ public class ChooseAreaFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getContext(), "加载失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "加载API失败", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -213,22 +257,29 @@ public class ChooseAreaFragment extends Fragment {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String responseText = response.body().string();
                 boolean result = false;
-                if("province".equals(type)){
+                // 根据对应的 Key 值进行查询和传送不同的数据
+                if("province".equals(type)) {
                     result = Utility.handleProvinceResponse(responseText);
-                }else if("city".equals(type)){
-                    result = Utility.handleCityResponse(responseText,selectedProvince.getProvinceCode());
-                }else if("county".equals(type)){
-                    result = Utility.handleCountyResponse(responseText,selectedCity.getCityCode());
                 }
+                else if("city".equals(type)) {
+                    result = Utility.handleCityResponse(responseText, selectedProvince.getProvinceCode());
+                }
+                else if("county".equals(type)) {
+                    result = Utility.handleCountyResponse(responseText, selectedCity.getCityCode());
+                }
+                // 若查询成功：
+                // 则调用活动中的方法 将其保存到数据库中 方便下次使用
                 if(result){
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if("province".equals(type)){
+                            if("province".equals(type)) {
                                 queryProvinces();
-                            }else if("county".equals(type)){
+                            }
+                            else if("county".equals(type)) {
                                 queryCities();
-                            }else if("county".equals(type)){
+                            }
+                            else if("county".equals(type)) {
                                 queryCounties();
                             }
                         }
@@ -237,286 +288,4 @@ public class ChooseAreaFragment extends Fragment {
             }
         });
     }
-    /*private void queryProvinceFromServer(String address) {
-        HttpUtil.sendOkHttpRequest(address, new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String responseString = response.body().string();
-                    JSONObject jsonObject =new JSONObject(responseString);
-                    JSONArray countryAll = jsonObject.getJSONArray("districts");
-                    for (int i = 0; i < countryAll.length(); i++) {
-                        JSONObject countryLeve0 = countryAll.getJSONObject(i);
-                        String country = countryLeve0.getString("level");
-                        int level = 0;
-                        if (country.equals("country")) {
-                            level = 0;
-                        }
-
-                        //插入省
-                        JSONArray provinceAll = countryLeve0.getJSONArray("districts");
-                        for (int j = 0; j < provinceAll.length(); j++) {
-                            JSONObject province1 = provinceAll.getJSONObject(j);
-                            String adcode1 = province1.getString("adcode");
-                            String name1 = province1.getString("name");
-                            Province provinceN = new Province();
-                            provinceN.setProvinceCode(adcode1);
-                            provinceN.setProvinceName(name1);
-                            provinceN.save();
-                            String province = province1.getString("level");
-                            if (province.equals("province")) {
-                                queryProvinces();
-                            }
-                                }
-                            }
-                        }
-                            catch(JSONException e){
-                                e.printStackTrace();
-                            }
-                        }
-
-        @Override
-            public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getContext(),"加载失败", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-    }
-
-    private void queryCityFromServer(String address) {
-        HttpUtil.sendOkHttpRequest(address, new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String responseString = response.body().string();
-                    JSONObject jsonObject = new JSONObject(responseString);
-                    JSONArray provinceAll = jsonObject.getJSONArray("districts");
-                        for (int j = 0; j < provinceAll.length(); j++) {
-                            JSONObject province1 = provinceAll.getJSONObject(j);
-                            String province = province1.getString("level");
-                            String adcode1 = province1.getString("adcode");
-                            int level2 = 0;
-                            if (province.equals("province")) {
-                                level2 = 2;
-                            }
-                            //插入市
-                            JSONArray cityAll = province1.getJSONArray("districts");
-                            for (int z = 0; z < cityAll.length(); z++) {
-                                JSONObject city2 = cityAll.getJSONObject(z);
-                                String adcode2 = city2.getString("adcode");
-                                String name2 = city2.getString("name");
-                                City cityN = new City();
-                                cityN.setCityCode(adcode2);
-                                cityN.setCityName(name2);
-                                cityN.setProvinceCode(adcode1);
-                                cityN.save();
-                                String city = city2.getString("level");
-                                if (city.equals("city")) {
-                                    queryCities();
-                                }
-
-                                    }
-                                }
-                            }
-                catch(JSONException e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getContext(),"加载失败", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-    }
-
-    private void queryCountyFromServer(String address) {
-        HttpUtil.sendOkHttpRequest(address, new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String responseString = response.body().string();
-                    JSONObject jsonObject = new JSONObject(responseString);
-                    JSONArray cityAll = jsonObject.getJSONArray("districts");
-                            for (int z = 0; z < cityAll.length(); z++) {
-                                JSONObject city2 = cityAll.getJSONObject(z);
-                                String city = city2.getString("level");
-                                String adcode2 = city2.getString("adcode");
-                                int level3 = 0;
-                                if (city.equals("city")) {
-                                    level3 = 3;
-                                }
-                                //插入市
-                                JSONArray countyAll = city2.getJSONArray("districts");
-                                for (int w = 0; w < countyAll.length(); w++) {
-                                    JSONObject county3 = countyAll.getJSONObject(w);
-                                    String adcode3 = county3.getString("adcode");
-                                    String name3 = county3.getString("name");
-                                    County countyN = new County();
-                                    countyN.setCountyCode(adcode3);
-                                    countyN.setCountyName(name3);
-                                    countyN.setCityCode(adcode2);
-                                    countyN.save();
-                                    String county = county3.getString("level");
-                                    if (county.equals("street")) {
-                                        queryCounties();
-                                    }
-                                }
-                            }
-                        }
-                catch(JSONException e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getContext(),"加载失败", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-    }
-*/
-    /*private void queryFromServer(String address) {
-        HttpUtil.sendOkHttpRequest(address, new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    JSONObject jsonObject = new JSONObject(String.valueOf(response));
-                    JSONArray countryAll = jsonObject.getJSONArray("districts");
-                    for (int i = 0; i < countryAll.length(); i++) {
-                        JSONObject countryLeve0 = countryAll.getJSONObject(i);
-                        String adcode0 = countryLeve0.getString("adcode");
-                        String name0 = countryLeve0.getString("name");
-                        String country = countryLeve0.getString("level");
-                        int level = 0;
-                        if (country.equals("country")) {
-                            level = 0;
-                        }
-
-                        //插入国家
-                        JSONArray provinceAll = countryLeve0.getJSONArray("districts");
-                        for (int j = 0; j < provinceAll.length(); j++) {
-                            JSONObject province1 = provinceAll.getJSONObject(j);
-                            String adcode1 = province1.getString("adcode");
-                            String name1 = province1.getString("name");
-                            Province provinceN = new Province();
-                            provinceN.setProvinceCode(adcode1);
-                            provinceN.setProvinceName(name1);
-                            provinceN.save();
-                            String province = province1.getString("level");
-                            if (province.equals("province")) {
-                                queryProvinces();
-                            }
-                            //插入省
-                            JSONArray cityAll = province1.getJSONArray("districts");
-                            for (int z = 0; z < cityAll.length(); z++) {
-                                JSONObject city2 = cityAll.getJSONObject(z);
-                                String adcode2 = city2.getString("adcode");
-                                String name2 = city2.getString("name");
-                                City cityN = new City();
-                                cityN.setCityCode(adcode2);
-                                cityN.setCityName(name2);
-                                cityN.save();
-                                String city = city2.getString("level");
-                                if (city.equals("city")) {
-                                    queryCities();
-                                }
-                                //插入市
-                                JSONArray county0 = city2.getJSONArray("districts");
-                                for (int w = 0; w < county0.length(); w++) {
-                                    JSONObject street3 = county0.getJSONObject(w);
-                                    String adcode3 = street3.getString("adcode");
-                                    String name3 = street3.getString("name");
-                                    County countyN = new County();
-                                    countyN.setCountyCode(adcode3);
-                                    countyN.setCountyName(name3);
-                                    countyN.save();
-                                    String county = street3.getString("level");
-                                    if (county.equals("street")) {
-                                        queryCounties();
-                                    }
-                                }
-                            }
-                        }
-                    }}
-                catch(JSONException e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getContext(),"加载失败", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-    }*/
-    /*private void getAdcode() {
-        String address = edit_city.getText().toString();
-        String url = "https://restapi.amap.com/v3/geocode/geo?key=你在高德控制台申请的Web服务的key&address=" + address;
-
-        final Request request = new Request.Builder().url(url).get().build();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Response response = null;
-                try {
-                    response = httpClient.newCall(request).execute();
-                    //请求成功
-                    if (response.isSuccessful()) {
-                        String result = response.body().string();
-
-                        Log.i("result", result);
-
-                        //转JsonObject
-                        JsonObject object = new JsonParser().parse(result).getAsJsonObject();
-                        //转JsonArray
-                        JsonArray array = object.get("geocodes").getAsJsonArray();
-                        JsonObject info = array.get(0).getAsJsonObject();
-
-                        //获取adcode
-                        String adcode = info.get("adcode").getAsString();
-                        Log.i("测试获取adcode", adcode);
-
-                        //请求天气查询
-                        getWeather(adcode);
-
-                        Message message = Message.obtain();
-                        message.what = 2;
-                        message.obj = adcode;
-                        handler.sendMessage(message);
-                    }
-                } catch (Exception e) {
-                    Log.i("SearchMainActivity.java", "服务器异常:" + e.toString());
-
-                    Message message = Message.obtain();
-                    message.what = 0;
-                    message.obj = "服务器异常";
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }*/
 }

@@ -14,25 +14,8 @@ import com.example.weather.db.Province;
 import com.example.weather.gson.Weather;
 
 public class Utility {
-    /*public static boolean handleProvinceResponse1(String response) {
-        if (!TextUtils.isEmpty(response)) {
-            try {
-                JSONArray allProvinces = new JSONArray(response);
-                for (int i = 0; i < allProvinces.length(); i++) {
-                    JSONObject provinceObject = allProvinces.getJSONObject(i);
-                    Province province = new Province();
-                    province.setProvinceName(provinceObject.getString("name"));
-                    province.setProvinceCode(provinceObject.getString("adcode"));
-                    province.save();
-                }
-                return true;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-*/
+
+    // 解析和保存服务器所返回的 省级数据
     public static boolean handleProvinceResponse(String response){
         if (!TextUtils.isEmpty(response)) {
             try {
@@ -40,7 +23,7 @@ public class Utility {
                 JSONArray countryAll = jsonObject.getJSONArray("districts");
                 for (int i = 0; i < countryAll.length(); i++) {
                     JSONObject countryLeve0 = countryAll.getJSONObject(i);
-                    //插入省
+                    // 插入省
                     JSONArray provinceAll = countryLeve0.getJSONArray("districts");
                     for (int j = 0; j < provinceAll.length(); j++) {
                         JSONObject province1 = provinceAll.getJSONObject(j);
@@ -61,6 +44,7 @@ public class Utility {
         return false;
     }
 
+    // 解析和保存服务器所返回的 市级数据
     public static boolean handleCityResponse(String response, String provinceCode){
         if (!TextUtils.isEmpty(response)) {
             try {
@@ -68,7 +52,7 @@ public class Utility {
                 JSONArray provinceAll = jsonObject.getJSONArray("districts");
                 for (int i = 0; i < provinceAll.length(); i++) {
                     JSONObject province1 = provinceAll.getJSONObject(i);
-                    //插入市
+                    // 插入市
                     JSONArray cityAll = province1.getJSONArray("districts");
                     for (int j = 0; j < cityAll.length(); j++) {
                         JSONObject city2 = cityAll.getJSONObject(j);
@@ -90,6 +74,7 @@ public class Utility {
         return false;
     }
 
+    // 解析和保存服务器所返回的 县级数据
     public static boolean handleCountyResponse(String response, String cityCode){
         if (!TextUtils.isEmpty(response)) {
             try {
@@ -97,7 +82,7 @@ public class Utility {
                 JSONArray cityAll = jsonObject.getJSONArray("districts");
                 for (int i = 0; i < cityAll.length(); i++) {
                     JSONObject city2 = cityAll.getJSONObject(i);
-                    //插入市
+                    // 插入县
                     JSONArray countyAll = city2.getJSONArray("districts");
                     for (int j = 0; j < countyAll.length(); j++) {
                         JSONObject county3 = countyAll.getJSONObject(j);
@@ -119,46 +104,7 @@ public class Utility {
         return false;
     }
 
-
-    /*public static boolean handleCityResponse1(String response, String  provinceCode) {
-        if (!TextUtils.isEmpty(response)) {
-            try {
-                JSONArray allCities = new JSONArray(response);
-                for (int i = 0; i < allCities.length(); i++) {
-                    JSONObject cityObject = allCities.getJSONObject(i);
-                    City city = new City();
-                    city.setCityName(cityObject.getString("name"));
-                    city.setCityCode(cityObject.getInt("adcode"));
-                    city.setProvinceCode(provinceCode);
-                    city.save();
-                }
-                return true;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-
-    public static boolean handleCountyResponse1(String response, String  cityCode){
-        if(!TextUtils.isEmpty(response)){
-            try{
-                JSONArray allCounties = new JSONArray(response);
-                for(int i=0; i<allCounties.length(); i++){
-                    JSONObject countyObject = allCounties.getJSONObject(i);
-                    County county = new County();
-                    county.setCountyName(countyObject.getString("name"));
-                    county.setCountyCode(countyObject.getString("adcode"));
-                    county.save();
-                }
-                return true;
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
-        }
-        return false;
-    }
-*/
+    // 将API返回的 JSON 数据进行解析 并封装为 Weather 类
     public static Weather handleWeatherResponse(String response) {
             try {
                 JSONObject jsonObject = new JSONObject(response);

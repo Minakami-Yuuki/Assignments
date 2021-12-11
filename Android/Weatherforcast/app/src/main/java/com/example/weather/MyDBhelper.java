@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyDBhelper extends SQLiteOpenHelper {
-    public static final String DB_NAME="Concern3.db";
+    public static final String DB_NAME="Minakami.db";
     public static final int VERSION=1;
     public static final String TABLE_NAME="Concern";
     //对数据库进行创建

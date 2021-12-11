@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
+<!--  创建数据库的关系对象映射  -->
+
     <!--数据库名称-->
     <dbname value="weather"/>
     <!--数据库版本号-->

@@ -3,14 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack">
-
-    <ImageView
-        android:id="@+id/bing_pic_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
-
+    android:background="@drawable/joker">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -80,6 +73,8 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <!-- 下拉刷新页面 -->
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <fragment
             android:id="@+id/choose_area_fragment"
