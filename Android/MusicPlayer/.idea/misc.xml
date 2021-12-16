@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/drawable/buttonshape.xml" value="0.24166666666666667" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/drawable/ic_baseline_ac_yuki_24.xml" value="0.14583333333333334" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/layout/fragment_dashboard.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/layout/fragment_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/layout/fragment_notifications.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/xml/network.xml" value="0.1296875" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/MusicPlayer/app/src/main/res/xml/security_config.xml" value="0.1296875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

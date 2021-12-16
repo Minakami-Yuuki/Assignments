@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@drawable/zimalin">
+
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/black"
+        app:title="~MusicPlayer"
+        app:titleTextColor="@color/white"
+        android:id="@+id/toolbar"
+        app:subtitle="      by Misaki"
+        app:subtitleTextColor="@color/purple_200"
+        app:titleMarginStart="95dp"
+        app:navigationIcon="@drawable/ic_baseline_ac_yuki_24"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/song"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+        <Button
+            android:id="@+id/btnDownload"
+            android:text="下载"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@+id/lv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <SeekBar
+        android:id="@+id/sb"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:maxHeight="2dp"
+        android:minHeight="2dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="12dp"
+        android:max="200"
+        android:progressTint="@color/black"
+        android:thumbTint="@color/purple_200"
+        android:paddingRight="12dp"
+        android:paddingTop="3dp" />
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:text="开始"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            style="?attr/buttonBarButtonStyle"
+            />
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:text="继续播放"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            style="?attr/buttonBarButtonStyle"
+            />
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:text="暂停"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            style="?attr/buttonBarButtonStyle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?attr/buttonBarButtonStyle"
+        >
+        <Button
+            android:id="@+id/btn_last"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:text="上一首"
+            android:textStyle="bold"
+            android:textColor="@color/DarkBlue"
+            style="?attr/buttonBarButtonStyle"
+            />
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.34"
+            android:text="刷新"
+            android:textStyle="bold"
+            android:textColor="@color/DarkBlue"
+            style="?attr/buttonBarButtonStyle"
+            />
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.33"
+            android:text="下一首"
+            android:textStyle="bold"
+            android:textColor="@color/DarkBlue"
+            style="?attr/buttonBarButtonStyle"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
