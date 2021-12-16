@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<!--  layout_width && layout_height : dp  -->
+<!--  textsize : sp  -->
+<!--  textcolor && background: 透明,红,绿,蓝 (00 00 00 00)  -->
+
+<!--  String类型 和 Colors类型 统一放置在 values 下  -->
+
+<!--  shadowRadius : 模糊度, 搭配shadowColor使用  -->
+
+<!--  跑马灯: marqueeRepeat
+      方式 :
+      1.添加click
+      2.用java类继承TextView并添加Force方法
+      3.添加<requestFocus/> -->
+<!--  1. <com.example.myapplication.TestMarquee  -->
+<!--  2. andriod:click = "true" -->
+<!--  3. <requestFocus/>  -->
+    <FrameLayout
+        android:background="@color/yellow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:background="@color/white"
+            app:navigationIcon="@drawable/ic_android_red_24dp"
+            app:title="标题"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"/>
+
+        <TextView
+            android:id="@+id/Test_One"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/taktop"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:orientation="vertical"
+            android:shadowColor="@color/yellow"
+            android:shadowDx="10.0"
+            android:shadowDy="10.0"
+            android:shadowRadius="3.0"
+
+            android:singleLine="true"
+            android:text="@string/text_name"
+            android:textColor="@color/purple_500"
+            android:textSize="40sp"
+
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <requestFocus />
+        </TextView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/button_name"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/btn_select"
+                android:onClick="sendNotification"
+                tools:ignore="MissingConstraints,OnClick" />
+
+            <Button
+                android:id="@+id/button_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/btn_select"
+                android:onClick="cancelNotification"
+                tools:ignore="MissingConstraints,OnClick,RtlHardcoded" />
+
+            <Button
+                android:id="@+id/button_name3"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_select_2"
+                android:onClick="alertClick"
+                tools:ignore="MissingConstraints,OnClick" />
+
+            <Button
+                android:id="@+id/button_name4"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginLeft="305dp"
+                android:background="@drawable/btn_select_3"
+                android:onClick="popupClick"
+                tools:ignore="MissingConstraints,OnClick" />
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/btn_select"
+                android:drawablePadding="10dp"
+                android:hint="@string/tenet"
+                android:inputType="date"
+                android:paddingLeft="20dp"
+                android:layout_alignParentBottom="true"
+                android:textColorHint="@color/yellow" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"/>
+<!--            android:src="@drawable/taktop" -->
+
+
+        <ProgressBar
+            android:id="@+id/pb"
+            android:progressDrawable="@drawable/pg_color"
+            android:visibility="visible"
+            android:layout_width="400dp"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:indeterminate="false"
+            android:progress="100"
+            android:max="100"
+            style="?android:attr/progressBarStyleHorizontal" />
+
+        <ProgressBar
+            android:id="@+id/pb2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:indeterminate="true"
+            android:max="100"
+            android:progress="50"
+            android:progressDrawable="@drawable/pg_color"
+            android:visibility="visible" />
+
+        <!--必须添加id-->
+        <fragment
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:name="com.example.myapplicationtest.BlankFragment1"
+            android:id="@+id/fragment1"
+            android:layout_gravity="center_vertical"/>
+
+        <fragment
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:name="com.example.myapplicationtest.BlankFragment2"
+            android:id="@+id/fragment2"
+            android:layout_gravity="center_vertical|right"/>
+
+    </FrameLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

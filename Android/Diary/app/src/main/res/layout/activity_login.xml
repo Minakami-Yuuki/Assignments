@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--登录界面总体布局为垂直线性布局-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<!--页面布局-->
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/black"
+        app:title="~Diary!"
+        app:titleTextColor="@color/white"
+        android:id="@+id/toolbar"
+        app:subtitle="by Misaki"
+        app:subtitleTextColor="@color/purple_200"
+        app:titleMarginStart="95dp"
+        app:navigationIcon="@drawable/ic_baseline_ac_yuki_24"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <!--留出一些空白-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text=""/>
+
+    <!--登录界面标题-->
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="26sp"
+        android:textStyle="italic"
+        android:text="Who are you ?"
+        />
+
+    <!--留出一些空白-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text=""/>
+
+    <!--用户名和密码部分采用垂直线性布局-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--用户名部分采用线性水平布局-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+            <!--用户名-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username："
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="10dp"/>
+            <!--用户名输入-->
+            <EditText
+                android:id="@+id/admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:hint="Name plz"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+        <!--密码部分采用线性水平布局-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <!--密码-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password："
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="10dp"/>
+
+            <!--密码输入-->
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:hint="pwd plz"
+                android:password="true"
+                android:padding="10dp"/>
+        </LinearLayout>
+        <!--密码部分-->
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text=""/>
+
+    <!--留出一些空白-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="40dp">
+
+        <!--'是否记住密码'复选框-->
+        <CheckBox
+            android:id="@+id/save_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true" />
+
+        <!--复选框提示信息-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/save_password"
+            android:text="Remember psw ?"
+            android:textSize="18sp" />
+
+        <!--复选框提示信息-->
+        <TextView
+            android:id="@+id/show_password_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Show psw ?"
+            android:textSize="18sp" />
+
+        <!--'是否明文显示密码'复选框-->
+        <CheckBox
+            android:id="@+id/show_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/show_password_info" />
+
+    </RelativeLayout>
+
+    <!--留白-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text=""/>
+
+    <!--画一条分割线-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEE9E9"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:text=""/>
+
+    <!--留出一些空白-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:text=""/>
+
+    <!--登录按钮-->
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Sign"
+        android:layout_gravity="center"
+        android:background="@drawable/buttonshape" />
+
+</LinearLayout>
+</FrameLayout>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Calculator</string>
+
+    <drawable name="unpressed">#DDDDDD</drawable>
+    <drawable name="pressed">#7700FF</drawable>
+</resources>

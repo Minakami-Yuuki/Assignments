@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_SDK/platforms/android-30/data/res/layout/simple_list_item_1.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2564814814814815" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/drawable/buttonshape.xml" value="0.262037037037037" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/drawable/ic_baseline_ac_yuki_24.xml" value="0.14583333333333334" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2564814814814815" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/layout/activity_detail.xml" value="0.264" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/menu/menu_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.24074074074074073" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/Diary/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14583333333333334" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2638888888888889" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/drawable/ic_baseline_ac_yuki_24.xml" value="0.2638888888888889" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2638888888888889" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2638888888888889" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2638888888888889" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2638888888888889" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/layout/activity_detail.xml" value="0.264" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/layout/fragment_dashboard.xml" value="0.12335359675785208" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/layout/fragment_home.xml" value="0.12335359675785208" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/layout/fragment_notifications.xml" value="0.12335359675785208" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/menu/menu_main.xml" value="0.264" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2638888888888889" />
+        <entry key="..\:/Chrome-Edge/IDEA/Android Studio_workSpace/diary/Diary/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2638888888888889" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
